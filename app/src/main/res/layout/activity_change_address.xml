@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.login.LoginActivity"
+    android:orientation="vertical"
+    android:fillViewport="true">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:elevation="0dp"
+            >
+            <include layout="@layout/toolbar"/>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!--        <ImageView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="150dp"-->
+        <!--            android:layout_marginStart="@dimen/margin_activity"-->
+        <!--            android:layout_marginEnd="@dimen/margin_activity"-->
+        <!--            android:layout_marginTop="@dimen/margin_activity"-->
+        <!--            android:src="@drawable/ic_undraw_profile_6l1l"-->
+        <!--            tools:ignore="ContentDescription" />-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_activity"
+            android:layout_marginTop="@dimen/margin_activity"
+            android:layout_marginEnd="@dimen/margin_activity"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Change Your"
+            android:textColor="@color/colorPrimary"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_activity"
+            android:layout_marginEnd="@dimen/margin_activity"
+            android:fontFamily="@font/poppins"
+            android:text="Address"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="640dp"
+            android:layout_marginStart="@dimen/margin_activity"
+            android:layout_marginEnd="@dimen/margin_activity"
+            android:layout_marginTop="@dimen/margin_activity"
+            app:cardCornerRadius="15dp"
+            android:background="@color/colorWhite"
+            app:cardElevation="0dp"
+            android:layout_marginBottom="@dimen/margin_activity"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent"
+                >
+                <EditText
+                    android:textSize="15sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/margin_activity"
+                    android:layout_marginStart="@dimen/margin_activity"
+                    android:layout_marginEnd="@dimen/margin_activity"
+                    android:id="@+id/edt_nama_penerima"
+                    android:inputType="text"
+                    android:importantForAutofill="no"
+                    tools:ignore="HardcodedText,LabelFor,RtlSymmetry"
+                    android:background="@drawable/bg_input"
+                    android:hint="Nama Penerima"
+                    android:paddingLeft="@dimen/margin_activity"
+                    android:paddingStart="@dimen/margin_activity"
+                    android:fontFamily="@font/poppins"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/margin_activity"
+                    android:layout_marginStart="@dimen/margin_activity"
+                    android:layout_marginEnd="@dimen/margin_activity"
+                    android:id="@+id/edt_phone"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    tools:ignore="HardcodedText,LabelFor,TextFields"
+                    android:background="@drawable/bg_input_disable"
+                    android:paddingLeft="@dimen/margin_activity"
+                    android:paddingStart="@dimen/margin_activity"
+                    android:hint="No Telepon"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="15sp"
+                    android:enabled="false"
+                    android:textColor="@color/black"
+                    />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp">
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_activity"
+                        android:layout_marginTop="@dimen/margin_low"
+                        android:text="Kecamatan, Kota, Provinsi"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="RtlCompat" />
+
+                    <TextView
+                        android:id="@+id/tv_ubah"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_low"
+                        android:layout_marginEnd="@dimen/margin_activity"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText,RtlCompat"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Ubah"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_activity"
+                        android:layout_marginTop="@dimen/margin_low"
+                        android:text="Set lokasi untuk isi Kecamatan,Kota, dan Provinsi"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView9"
+                        tools:ignore="HardcodedText,RtlCompat"
+                        android:textSize="10sp"
+                        android:textColor="@color/black"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/btn_maps"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="@dimen/margin_activity"
+                        android:layout_marginEnd="@dimen/margin_activity"
+                        android:background="@drawable/bg_maps"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView2"
+                        android:gravity="center_vertical|center_horizontal"
+                        >
+                        <TextView
+                            android:id="@+id/tv_set"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Set Lokasi"
+                            android:visibility="visible"
+                            />
+                        <ImageView
+                            android:id="@+id/iv_map"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_map"
+                            android:visibility="gone"
+                            />
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tv_detail_alamat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_activity"
+                    android:layout_marginEnd="@dimen/margin_activity"
+                    android:text="Jatinegara, Jakarta Timur, DKI Jakarta"
+                    tools:ignore="HardcodedText"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:visibility="gone"
+                    />
+
+                <EditText
+                    android:id="@+id/edt_pos"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="@dimen/margin_activity"
+                    android:layout_marginTop="@dimen/margin_activity"
+                    android:layout_marginEnd="@dimen/margin_activity"
+                    android:background="@drawable/bg_input"
+                    android:fontFamily="@font/poppins"
+                    android:hint="Kode Pos"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:paddingStart="@dimen/margin_activity"
+                    android:paddingLeft="@dimen/margin_activity"
+                    android:textSize="15sp"
+                    tools:ignore="HardcodedText,LabelFor" />
+
+                <EditText
+                    android:id="@+id/edt_alamat"
+                    android:layout_width="fill_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="@dimen/margin_activity"
+                    android:layout_marginTop="@dimen/margin_activity"
+                    android:layout_marginEnd="@dimen/margin_activity"
+                    android:background="@drawable/bg_input"
+                    android:fontFamily="@font/poppins"
+                    android:hint="Alamat Lengkap"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:paddingStart="@dimen/margin_activity"
+                    android:paddingLeft="@dimen/margin_activity"
+                    android:textSize="15sp"
+                    android:paddingTop="10dp"
+                    android:lines="5"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:minLines="5"
+                    android:gravity="top|left"
+                    android:scrollbars="vertical"
+                    />
+
+
+                <Button
+                    android:id="@+id/btn_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="@dimen/margin_activity"
+                    android:layout_marginEnd="@dimen/margin_activity"
+                    android:layout_marginTop="@dimen/margin_activity"
+                    android:text="Simpan"
+                    tools:ignore="HardcodedText"
+                    android:background="@drawable/bg_button"
+                    android:textColor="@color/colorWhite"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</ScrollView>

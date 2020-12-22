@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "602165671093",
+    "firebase_url": "https://fikfish-project.firebaseio.com",
+    "project_id": "fikfish-project",
+    "storage_bucket": "fikfish-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602165671093:android:58f144819190aa36553afc",
+        "android_client_info": {
+          "package_name": "com.example.sepatu_customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602165671093-f7qkc8bbesf6th3uqd6t48eighqbgs8v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sepatu_customer",
+            "certificate_hash": "690eab78e14cf89fea9fd834c07ef575837fe521"
+          }
+        },
+        {
+          "client_id": "602165671093-nhh44h6as003m0t4u7hkk0gbnlo01nfk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArCfhInxH3uXW2kJoCWvc-TJSQ7oNnvc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "602165671093-nhh44h6as003m0t4u7hkk0gbnlo01nfk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

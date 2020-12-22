@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.login.LoginActivity"
+    android:orientation="vertical"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginStart="@dimen/margin_activity"
+            android:layout_marginEnd="@dimen/margin_activity"
+            android:layout_marginTop="@dimen/margin_activity"
+            android:src="@drawable/ic_undraw_login_re_4vu2"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_activity"
+            android:layout_marginTop="@dimen/margin_activity"
+            android:layout_marginEnd="@dimen/margin_activity"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/let_s_start_with"
+            android:textColor="@color/colorPrimary"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_activity"
+            android:layout_marginEnd="@dimen/margin_activity"
+            android:fontFamily="@font/poppins"
+            android:text="@string/login"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:layout_marginStart="@dimen/margin_activity"
+            android:layout_marginEnd="@dimen/margin_activity"
+            android:layout_marginTop="@dimen/margin_activity"
+            app:cardCornerRadius="15dp"
+            android:background="@color/colorWhite"
+            app:cardElevation="0dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent"
+                >
+            <EditText
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/margin_activity"
+                android:layout_marginStart="@dimen/margin_activity"
+                android:layout_marginEnd="@dimen/margin_activity"
+                android:id="@+id/edt_username"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                tools:ignore="LabelFor,RtlSymmetry"
+                android:background="@drawable/bg_input"
+                android:hint="@string/username"
+                android:paddingLeft="@dimen/margin_activity"
+                android:paddingStart="@dimen/margin_activity"
+                android:fontFamily="@font/poppins"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/margin_activity"
+                android:layout_marginStart="@dimen/margin_activity"
+                android:layout_marginEnd="@dimen/margin_activity"
+                android:id="@+id/edt_password"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                tools:ignore="LabelFor"
+                android:background="@drawable/bg_input"
+                android:paddingLeft="@dimen/margin_activity"
+                android:paddingStart="@dimen/margin_activity"
+                android:hint="@string/password"
+                android:fontFamily="@font/poppins"
+                android:textSize="15sp"
+                />
+
+                <Button
+                    android:id="@+id/btn_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="@dimen/margin_activity"
+                    android:layout_marginEnd="@dimen/margin_activity"
+                    android:layout_marginTop="@dimen/margin_activity"
+                    android:text="Login"
+                    tools:ignore="HardcodedText"
+                    android:background="@drawable/bg_button"
+                    android:textColor="@color/colorWhite"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textSize="19sp"
+                    />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_forget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="@font/allerta"
+            android:textSize="15sp"
+            android:layout_marginTop="@dimen/margin_activity"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/margin_activity"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/margin_activity"
+                android:layout_marginEnd="@dimen/margin_activity"
+                android:background="@drawable/container_card"
+
+                >
+
+                <TextView
+
+                    android:id="@+id/idont"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginLeft="48dp"
+                    android:text="@string/i_don_t_have_an_account"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.521" />
+
+                <TextView
+                    android:id="@+id/tv_sign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.081"
+                    app:layout_constraintStart_toEndOf="@+id/idont"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>
