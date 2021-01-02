@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -52,6 +53,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 context.startActivity(moveToDetail);
             }
         });
+
+        if(dataOrder.getStatus().equals("Ditunda")){
+            holder.tv_status.setBackgroundResource(R.drawable.bg_outline_danger);
+            holder.tv_status.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
+        }else if(dataOrder.getStatus().equals("Menunggu Pengiriman")){
+            holder.tv_status.setBackgroundResource(R.drawable.bg_outline_warning);
+            holder.tv_status.setTextColor(ContextCompat.getColor(context,R.color.colorOrange));
+        }else if(dataOrder.getStatus().equals("Sudah Diterima")){
+            holder.tv_status.setBackgroundResource(R.drawable.bg_outline_success);
+            holder.tv_status.setTextColor(ContextCompat.getColor(context,R.color.colorGreen));
+        }else{
+            holder.tv_status.setBackgroundResource(R.drawable.bg_button);
+            holder.tv_status.setTextColor(ContextCompat.getColor(context,R.color.colorWhite));
+        }
     }
 
     @Override

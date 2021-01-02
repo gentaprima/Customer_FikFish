@@ -142,7 +142,7 @@ public class HomeActivity extends AppCompatActivity implements AccountFragment.O
                     case R.id.menu_transaksi:
                         fm.beginTransaction().hide(active).show(fragmentTransaction).commit();
                         active = fragmentTransaction;
-                        title.setText("Transaksi Saya");
+                        title.setText("Riwayat Pemesanan");
                         imageCart.setVisibility(View.VISIBLE);
                         return true;
 

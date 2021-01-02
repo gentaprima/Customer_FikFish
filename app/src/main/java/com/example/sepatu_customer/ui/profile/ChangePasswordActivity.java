@@ -18,7 +18,7 @@ import com.example.sepatu_customer.model.MessageOnly;
 import com.example.sepatu_customer.session.SystemDataLocal;
 import com.example.sepatu_customer.utils.DialogClass;
 
-public class ChangePassword extends AppCompatActivity {
+public class ChangePasswordActivity extends AppCompatActivity {
 
     EditText edt_oldpassword,edt_newpassword,edt_confirm;
     Button btn_submit;

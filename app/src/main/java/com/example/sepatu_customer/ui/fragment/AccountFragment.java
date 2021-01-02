@@ -7,8 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,13 +36,12 @@ import com.example.sepatu_customer.ui.home.HomeActivity;
 import com.example.sepatu_customer.ui.login.LoginActivity;
 import com.example.sepatu_customer.ui.profile.ChangeAddressActivity;
 import com.example.sepatu_customer.ui.profile.ChangeEmailActivity;
-import com.example.sepatu_customer.ui.profile.ChangePassword;
+import com.example.sepatu_customer.ui.profile.ChangePasswordActivity;
 import com.example.sepatu_customer.ui.profile.ChangePictureViewModel;
 import com.example.sepatu_customer.ui.profile.ChangeProfileActivity;
 import com.example.sepatu_customer.utils.DialogClass;
 
 import java.io.File;
-import java.io.InputStream;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -200,7 +197,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case  R.id.cardViewPassword:
-                startActivity(new Intent(getContext(), ChangePassword.class));
+                startActivity(new Intent(getContext(), ChangePasswordActivity.class));
                 break;
 
             case R.id.cardViewLocation:

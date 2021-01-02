@@ -73,6 +73,7 @@ public class DetailOrderActivity extends AppCompatActivity implements View.OnCli
     private SystemDataLocal systemDataLocal;
     private ResumeShippingViewModel resumeShippingViewModel;
     EditText edt_tanggal;
+    String numberOrder;
 
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
@@ -152,6 +153,7 @@ public class DetailOrderActivity extends AppCompatActivity implements View.OnCli
                 iv_alamatshow.setVisibility(View.VISIBLE);
             }
         });
+        numberOrder = orderData.getNumber();
         tv_status.setText(orderData.getStatus());
         tv_idorder.setText(orderData.getOrderId());
         tv_phone.setText(orderData.getNoHp());
