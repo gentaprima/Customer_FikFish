@@ -23,7 +23,7 @@
         android:layout_marginStart="@dimen/margin_activity"
         android:layout_marginEnd="@dimen/margin_activity"
         android:fontFamily="@font/poppins_semibold"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textColor="@color/black"
         tools:ignore="HardcodedText" />
 

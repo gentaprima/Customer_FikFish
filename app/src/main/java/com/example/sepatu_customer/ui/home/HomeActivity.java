@@ -62,10 +62,15 @@ public class HomeActivity extends AppCompatActivity implements AccountFragment.O
         setSupportActionBar(toolbar);
         title = findViewById(R.id.title);
         imageCart = findViewById(R.id.iv_cart);
+        systemDataLocal = new SystemDataLocal(this);
         imageCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, CartActivity.class));
+                if(systemDataLocal.getCheckLogin()){
+                    startActivity(new Intent(HomeActivity.this, CartActivity.class));
+                }else{
+                    Toast.makeText(getApplicationContext(),"Silahkan Login terlebih dahulu",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -80,7 +85,7 @@ public class HomeActivity extends AppCompatActivity implements AccountFragment.O
             getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.colorWhite));
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-        systemDataLocal = new SystemDataLocal(this);
+
 
         if(savedInstanceState != null){
             switch (savedInstanceState.getInt("fragsate")){

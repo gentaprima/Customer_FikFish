@@ -7,6 +7,7 @@ import com.example.sepatu_customer.model.login.LoginResponse;
 import com.example.sepatu_customer.model.order.OrderResponse;
 import com.example.sepatu_customer.model.order.TransactionResponse;
 import com.example.sepatu_customer.model.product.ProductResponse;
+import com.example.sepatu_customer.model.shipping.ShippingResponse;
 import com.example.sepatu_customer.model.wishlist.WishlistResponse;
 
 import okhttp3.MultipartBody;
@@ -143,4 +144,8 @@ public interface ApiInterface {
                                   @Field("newEmail")String newEmail,
                                   @Field("confirmEmail")String confirmEmail,
                                   @Field("id_users")String id_users);
+
+    @FormUrlEncoded
+    @POST("shipping/getDataShippingByNumber")
+    Call<ShippingResponse> detailShipping(@Field("number_order")String numberOrder);
 }

@@ -25,7 +25,9 @@ import com.example.sepatu_customer.model.cart.CartResponse;
 import com.example.sepatu_customer.model.cart.DataCart;
 import com.example.sepatu_customer.session.SystemDataLocal;
 import com.example.sepatu_customer.ui.checkout.CheckoutActivity;
+import com.example.sepatu_customer.ui.home.HomeActivity;
 import com.example.sepatu_customer.ui.profile.ChangeAddressActivity;
+import com.example.sepatu_customer.ui.profile.ChangeProfileActivity;
 import com.example.sepatu_customer.utils.DialogClass;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ChasingDots;
@@ -55,6 +57,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private Double latShop,lotShop,latUsers,lotUsers;
     AlertDialog.Builder builder;
     private int ongkosKirim;
+    int jumlahOrder = 0;
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +111,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         lotShop = 106.884471;
         String latitude = systemDataLocal.getLoginData().getLatitude();
         String longitude = systemDataLocal.getLoginData().getLongtitude();
-        System.out.println(latitude + " " +longitude);
         if(latitude != null){
             latUsers = Double.parseDouble(latitude);
         }
@@ -127,7 +129,14 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             ongkosKirim = Integer.parseInt(convertDistance) * 3000;
         }
 
+
+
+        if(systemDataLocal.getLoginData().getLatitude().equals("0")){
+            tv_ongkir.setText("Rp 0");
+        }else{
+
         tv_ongkir.setText("Rp " + String.format("%,d",Integer.parseInt(String.valueOf(ongkosKirim))));
+        }
     }
 
     private void loadData() {
@@ -137,9 +146,16 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onChanged(CartResponse cartResponse) {
                 if(cartResponse != null){
+
                     if(cartResponse.getData().size() > 0){
+                        jumlahOrder = cartResponse.getData().size();
                         readData(cartResponse.getData());
-                        tv_subtotal.setText("Rp " + String.format("%,d",Integer.parseInt(cartResponse.getTotal_harga())));
+                        if(cartResponse.getTotal_harga() != null){
+
+                            tv_subtotal.setText("Rp " + String.format("%,d",Integer.parseInt(cartResponse.getTotal_harga())));
+                        }else{
+                            tv_subtotal.setText("Rp 0");
+                        }
                         if(!cartResponse.getTotal_harga().equals("")){
                             int total = Integer.parseInt(cartResponse.getTotal_harga());
                             int totalAfterOngkir = total + ongkosKirim;
@@ -148,16 +164,44 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                             tv_total.setText("Rp " + String.format("%,d",Integer.parseInt(cartResponse.getTotal_harga())));
                         }
 
+                    }else{
+                        jumlahOrder = 0;
                     }
                 }
             }
         });
     }
 
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
     protected void onResume() {
         super.onResume();
         loadData();
+        String latitude = systemDataLocal.getLoginData().getLatitude();
+        String longitude = systemDataLocal.getLoginData().getLongtitude();
+
+        if(latitude != null){
+            latUsers = Double.parseDouble(latitude);
+        }
+        if(longitude != null){
+            lotUsers = Double.parseDouble(longitude);
+        }
+        LatLng from = new LatLng(latShop,lotShop);
+        LatLng to = new LatLng(latUsers,lotUsers);
+        Double distance = ((SphericalUtil.computeDistanceBetween(from,to)) / 1000) + 1.4;
+
+        if(distance <= 1){
+            ongkosKirim = 3000;
+        }else{
+            String convertDistance = String.valueOf(distance).substring(0,1);
+            ongkosKirim = Integer.parseInt(convertDistance) * 3000;
+        }
+        if(systemDataLocal.getLoginData().getLatitude().equals("0")){
+            tv_ongkir.setText("Rp 0");
+        }else{
+
+            tv_ongkir.setText("Rp " + String.format("%,d",Integer.parseInt(String.valueOf(ongkosKirim))));
+        }
     }
 
     private void readData(List<DataCart> data) {
@@ -178,7 +222,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private void displayDialog(String detail, String button){
+    private void displayDialog(String detail, String button, final String move){
         builder = new AlertDialog.Builder(this);
         myview = getLayoutInflater().inflate(R.layout.dialog_alamat,null,false);
         builder.setView(myview);
@@ -189,7 +233,14 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         btn_alamat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CartActivity.this, ChangeAddressActivity.class));
+                if(move.equals("alamat")){
+                    startActivity(new Intent(CartActivity.this, ChangeAddressActivity.class));
+                }else if(move.equals("phone")){
+                    startActivity(new Intent(CartActivity.this, ChangeProfileActivity.class));
+                }else{
+                    startActivity(new Intent(CartActivity.this, HomeActivity.class));
+                }
+
             }
         });
         builder.show();
@@ -258,15 +309,25 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 if(systemDataLocal.getLoginData().getAlamat().equals("")){
                     String detail = "Lengkapi Alamat Terlebih Dahulu ...";
                     String button = "Tambah Alamat";
-                    displayDialog(detail,button);
+                    String move = "alamat";
+                    displayDialog(detail,button,move);
                 }else if(systemDataLocal.getLoginData().getNo_hp().equals("")){
                     String detail = "Lengkapi No Telepon Terlebih Dahulu ...";
                     String button = "Tambah No Telepon";
-                    displayDialog(detail,button);
+                    String move = "phone";
+                    displayDialog(detail,button,move);
                 }else{
-                    Intent moveCheckout = new Intent(CartActivity.this,CheckoutActivity.class);
-                    moveCheckout.putExtra("ongkir",ongkosKirim);
-                    startActivity(moveCheckout);
+                    if(jumlahOrder > 0){
+                        Intent moveCheckout = new Intent(CartActivity.this,CheckoutActivity.class);
+                        moveCheckout.putExtra("ongkir",ongkosKirim);
+                        startActivity(moveCheckout);
+                    }else {
+                        String detail = "Silahkan tambahkan produk yang ingin dipesan terlebih dahulu ...";
+                        String button = "Cari Produk";
+                        String move = "home";
+                        displayDialog(detail,button,move);
+                    }
+
                     break;
                 }
 

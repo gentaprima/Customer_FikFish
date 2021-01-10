@@ -1,6 +1,7 @@
 package com.example.sepatu_customer.ui.order;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -35,6 +36,7 @@ import com.example.sepatu_customer.model.MessageOnly;
 import com.example.sepatu_customer.model.order.DataTransaction;
 import com.example.sepatu_customer.model.order.OrderData;
 import com.example.sepatu_customer.model.order.TransactionResponse;
+import com.example.sepatu_customer.model.shipping.ShippingResponse;
 import com.example.sepatu_customer.session.SystemDataLocal;
 import com.example.sepatu_customer.ui.home.HomeActivity;
 import com.example.sepatu_customer.ui.order.payment.AddPaymentViewModel;
@@ -42,7 +44,10 @@ import com.example.sepatu_customer.utils.DatePicker;
 import com.example.sepatu_customer.utils.DialogClass;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Objects;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -72,6 +77,7 @@ public class DetailOrderActivity extends AppCompatActivity implements View.OnCli
     private CancelOrderViewModel cancelOrderViewModel;
     private SystemDataLocal systemDataLocal;
     private ResumeShippingViewModel resumeShippingViewModel;
+    private DetailShippingViewModel detailShippingViewModel;
     EditText edt_tanggal;
     String numberOrder;
 
@@ -163,6 +169,7 @@ public class DetailOrderActivity extends AppCompatActivity implements View.OnCli
         tv_ongkir.setText("Rp " + String.format("%,d",Integer.parseInt(orderData.getShippingCosts())));
         getDetailDataOrderViewModel = ViewModelProviders.of(this).get(GetDetailDataOrderViewModel.class);
         resumeShippingViewModel = ViewModelProviders.of(this).get(ResumeShippingViewModel.class);
+        detailShippingViewModel = ViewModelProviders.of(this).get(DetailShippingViewModel.class);
         String statusOrder = orderData.getStatus();
         if(statusOrder.equals("Menunggu Diproses")){
             btn_file.setVisibility(GONE);
@@ -208,16 +215,42 @@ public class DetailOrderActivity extends AppCompatActivity implements View.OnCli
         }else if(statusOrder.equals("Menunggu Pengiriman")){
             btn_file.setVisibility(GONE);
             tv_pembayaran.setText("Pesanan Anda Sudah dibayar, Terimakasih");
-            tv_tunda.setText("Pesanan anda akan dikirimkan berdasarkan tanggal yang anda tentukan");
+//            tv_tunda.setText("Pesanan anda akan dikirimkan berdasarkan tanggal yang anda tentukan");
             btn_tunda.setVisibility(GONE);
+            loadDataShipping();
         }
 
         loadDataDetail();
+
         addPaymentViewModel = ViewModelProviders.of(this).get(AddPaymentViewModel.class);
         cancelOrderViewModel = ViewModelProviders.of(this).get(CancelOrderViewModel.class);
         btn_file.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
         btn_tunda.setOnClickListener(this);
+    }
+
+    private void loadDataShipping() {
+        detailShippingViewModel.detailShipping(numberOrder).observe(this, new Observer<ShippingResponse>() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onChanged(ShippingResponse shippingResponse) {
+                if(shippingResponse.getStatus()){
+                    String date = shippingResponse.getDataShipping().getDateShipping();
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat format2 = new SimpleDateFormat("dd MMMM yyyy");
+                    try {
+                        String date2 = format2.format(Objects.requireNonNull(format1.parse(date)));
+                        tv_tunda.setText("Pesanan anda akan dikirimkan kembali pada tanggal " + date2);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                }else{
+                    tv_tunda.setText("Silahkan Ubah Jadwal Pengiriman Anda");
+                }
+            }
+        });
     }
 
     private void loadDataDetail() {
@@ -441,9 +474,11 @@ public class DetailOrderActivity extends AppCompatActivity implements View.OnCli
         String id_shipping = orderData.getNumber();
         String date = edt_tanggal.getText().toString();
 
+//        Toast.makeText(getApplicationContext(),"numberOrder : " + id_shipping + "  date : " + date ,Toast.LENGTH_SHORT).show();
         View v = getLayoutInflater().inflate(R.layout.loading_alert,null,false);
         alertDialog = DialogClass.dialog(this,v).create();
         alertDialog.show();
+
 
         resumeShippingViewModel.resumeShipping(id_shipping,date).observe(this, new Observer<MessageOnly>() {
             @Override
